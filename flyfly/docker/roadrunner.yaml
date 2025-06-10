@@ -1,0 +1,6 @@
+FROM ghcr.io/roadrunner-server/roadrunner:2025.1 AS roadrunner
+FROM php:8.4-cli
+
+COPY --from=roadrunner /usr/bin/rr /usr/local/bin/rr
+
+CMD rr serve -c .rr.yaml
