@@ -8,9 +8,12 @@ services:
       - "8080:8080"
     container_name: "rr"
     volumes:
-      - type: volume
-        source: project
-        target: "/srv/www"
+      - ./:/srv/www
+#      - project:/srv/www
 
-volumes:
-  project:
+#    - type: bind
+#      source: ./
+#      target: /srv/www
+
+#volumes:
+#  project:
