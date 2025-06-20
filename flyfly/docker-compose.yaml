@@ -3,7 +3,7 @@ services:
   roadrunner:
 #    working_dir: "/srv/www"
     build:
-      dockerfile: ./docker/roadrunner
+      dockerfile: ./docker/roadrunner/Dockerfile
     ports:
       - "8080:8080"
     container_name: "rr"
