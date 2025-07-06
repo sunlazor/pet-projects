@@ -37,6 +37,13 @@
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/nyholm/psr7" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/spiral/roadrunner-http" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/roadrunner-php/roadrunner-api-dto" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/google/protobuf" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
