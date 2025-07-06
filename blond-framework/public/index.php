@@ -4,7 +4,8 @@ namespace App;
 
 include_once dirname(__DIR__) . '/vendor/autoload.php';
 
+use Sunlazor\BlondFramework\Http\Request;
 
-//echo '<h1>Hello, World!</h1>';
+$request = Request::createFromGlobals();
 
-dd('Hello, World!');
+dd($request);
