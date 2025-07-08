@@ -9,11 +9,21 @@ class Request
         private readonly array $postData,
         private readonly array $cookies,
         private readonly array $filse,
-        public readonly array $server,
+        private readonly array $server,
     ) {}
 
     public static function createFromGlobals(): static
     {
         return new static($_GET, $_POST, $_COOKIE, $_FILES, $_SERVER);
+    }
+
+    public function getPath(): false|string
+    {
+        return strtok($this->server['REQUEST_URI'], '?');
+    }
+
+    public function getMethod(): false|string
+    {
+        return $this->server['REQUEST_METHOD'];
     }
 }
