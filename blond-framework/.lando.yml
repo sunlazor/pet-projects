@@ -3,7 +3,9 @@ recipe: lemp
 config:
   php: '8.4'
   database: mysql
-  webroot: public
+  via: nginx
+  config:
+    vhosts: .lando/nginx.conf
 
 services:
   phpmyadmin:

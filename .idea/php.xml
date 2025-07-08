@@ -44,6 +44,11 @@
       <path value="$PROJECT_DIR$/flyfly/vendor/roadrunner-php/roadrunner-api-dto" />
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-php83" />
       <path value="$PROJECT_DIR$/flyfly/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/composer" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
