@@ -12,17 +12,23 @@ class Kernel
     public function handle(Request $request): Response
     {
         $dispatcher = simpleDispatcher(function (RouteCollector $rc) {
-            $rc->addRoute('GET', '/', function () {
-                $content = '<h1>Content!sss</h1>';
+            $routes = include BASE_PATH . '/routes/web.php';
 
-                return new Response($content);
-            });
-
-            $rc->get('/test/{id}', function (array $vars) {
-                $content = "<h1>Tesst = {$vars['id']}</h1>";
-
-                return new Response($content);
-            });
+            foreach ($routes as $route) {
+                $rc->addRoute(...$route);
+            }
+            
+//            $rc->addRoute('GET', '/', function () {
+//                $content = '<h1>Content!sss</h1>';
+//
+//                return new Response($content);
+//            });
+//
+//            $rc->get('/test/{id}', function (array $vars) {
+//                $content = "<h1>Tesst = {$vars['id']}</h1>";
+//
+//                return new Response($content);
+//            });
         });
 
         $routeInfo = $dispatcher->dispatch(

@@ -2,7 +2,9 @@
 
 namespace App;
 
-include_once dirname(__DIR__) . '/vendor/autoload.php';
+define('BASE_PATH', dirname(__DIR__));
+
+include_once BASE_PATH . '/vendor/autoload.php';
 
 use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Http\Request;
