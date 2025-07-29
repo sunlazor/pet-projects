@@ -3,7 +3,6 @@
 namespace Sunlazor\BlondFramework\Http;
 
 use FastRoute\RouteCollector;
-
 use function FastRoute\simpleDispatcher;
 
 class Kernel
@@ -36,8 +35,8 @@ class Kernel
             $request->getPath(),
         );
 
-        [$status, $handler, $vars] = $routeInfo;
+        [$status, [$controller, $method], $vars] = $routeInfo;
 
-        return $handler($vars);
+        return call_user_func_array([new $controller, $method], $vars);
     }
 }
