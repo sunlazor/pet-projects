@@ -12,8 +12,14 @@ class Kernel
 
     public function handle(Request $request): Response
     {
-        [$routerHandler, $vars] = $this->router->dispatch($request);
+        try {
+            [$routerHandler, $vars] = $this->router->dispatch($request);
 
-        return call_user_func_array($routerHandler, $vars);
+            $response = call_user_func_array($routerHandler, $vars);
+        } catch (\Throwable $e) {
+            $response = new Response($e->getMessage(), 500);
+        }
+
+        return $response;
     }
 }
