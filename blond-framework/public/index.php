@@ -8,11 +8,12 @@ include_once BASE_PATH . '/vendor/autoload.php';
 
 use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Http\Request;
+use Sunlazor\BlondFramework\Routing\Router;
+
+$router = new Router();
+$kernel = new Kernel($router);
 
 $request = Request::createFromGlobals();
-
-$kernel = new Kernel($request);
-
 $response = $kernel->handle($request);
 
 $response->send();
