@@ -14,9 +14,17 @@ class Router implements RouterInterface
 {
     public function dispatch(Request $request): array
     {
-        [[$controller, $method], $vars] = $this->extractRouteInfo($request);
+        [$handler, $vars] = $this->extractRouteInfo($request);
 
-        return [[new $controller, $method], $vars];
+        if (is_array($handler)) {
+            [$controller, $method] = $handler;
+
+            return [[new $controller, $method], $vars];
+        } elseif (is_callable($handler)) {
+            return [$handler, $vars];
+        } else {
+            throw new \InvalidArgumentException("Critical dispatch error");
+        }
     }
 
     public function extractRouteInfo(Request $request): array
