@@ -49,6 +49,7 @@
       <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/deprecation-contracts" />
       <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/blond-framework/vendor/composer" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/sunlazor/blond-framework" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />

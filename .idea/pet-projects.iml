@@ -3,9 +3,9 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/blond-framework/app" isTestSource="false" packagePrefix="App\" />
-      <sourceFolder url="file://$MODULE_DIR$/blond-framework/framework" isTestSource="false" packagePrefix="Sunlazor\BlondFramework\" />
       <sourceFolder url="file://$MODULE_DIR$/blond-framework/spec" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/flyfly/spec" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/sunlazor/blond-framework" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
