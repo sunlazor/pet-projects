@@ -7,7 +7,6 @@ use FastRoute\RouteCollector;
 use Sunlazor\BlondFramework\Http\Request;
 use Sunlazor\BlondFramework\Routing\Exception\MethodNotAllowedException;
 use Sunlazor\BlondFramework\Routing\Exception\RouteNotFoundException;
-
 use function FastRoute\simpleDispatcher;
 
 class Router implements RouterInterface

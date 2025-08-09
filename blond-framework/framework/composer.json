@@ -1,0 +1,19 @@
+{
+  "name": "sunlazor/blond-framework",
+  "description": "Project of framework implementation course",
+  "authors": [
+    {
+      "name": "sunlazor"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Sunlazor\\BlondFramework\\": "src"
+    }
+  },
+  "require": {
+    "php": "^8.4",
+    "nikic/fast-route": "^1.3"
+  }
+}
