@@ -4,14 +4,10 @@ namespace Sunlazor\BlondFramework\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Sunlazor\BlondFramework\Container\Container;
+use Sunlazor\BlondFramework\Container\Exceptions\ContainerException;
 
 class ContainerTests extends TestCase
 {
-    public function test_assert_true()
-    {
-        $this->assertTrue(false);
-    }
-
     public function test_getting_service_from_container()
     {
         $container = new Container();
@@ -19,5 +15,14 @@ class ContainerTests extends TestCase
         $container->add('test-class', FooClass::class);
 
         $this->assertInstanceOf(FooClass::class, $container->get('test-class'));
+    }
+
+    public function test_Container_returns_exception_on_wrong_class()
+    {
+        $container = new Container();
+
+        $this->expectException(ContainerException::class);
+
+        $container->add('wrong-class');
     }
 }
