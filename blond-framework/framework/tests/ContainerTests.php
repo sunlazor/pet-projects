@@ -25,4 +25,14 @@ class ContainerTests extends TestCase
 
         $container->add('wrong-class');
     }
+
+    public function test_Container_implements_has_method()
+    {
+        $container = new Container();
+
+        $container->add('test-class', FooClass::class);
+
+        $this->assertTrue($container->has('test-class'));
+        $this->assertFalse($container->has('wrong-class'));
+    }
 }
