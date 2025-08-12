@@ -35,4 +35,18 @@ class ContainerTests extends TestCase
         $this->assertTrue($container->has('test-class'));
         $this->assertFalse($container->has('wrong-class'));
     }
+
+    public function test_recursive_autowiring()
+    {
+        $container = new Container();
+
+        $container->add('test-class', FooClass::class);
+
+        /** @var FooClass $wiredClass */
+        $wiredClass = $container->get('test-class');
+
+        $this->assertInstanceOf(DependOnMe::class, $wiredClass->getDependOnMe());
+        $this->assertInstanceOf(DeeperDependOne::class, $wiredClass->getDependOnMe()->getDependOne());
+        $this->assertInstanceOf(DeeperDependTwo::class, $wiredClass->getDependOnMe()->getDependTwo());
+    }
 }
