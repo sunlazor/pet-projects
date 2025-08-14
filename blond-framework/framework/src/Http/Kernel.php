@@ -8,10 +8,14 @@ use Sunlazor\BlondFramework\Routing\RouterInterface;
 
 class Kernel
 {
+    private string $appEnv = 'local';
+
     public function __construct(
         readonly private RouterInterface $router,
         readonly private ContainerInterface $container,
-    ) {}
+    ) {
+        $this->appEnv = $container->get('APP_ENV');
+    }
 
     public function handle(Request $request): Response
     {
@@ -20,11 +24,22 @@ class Kernel
 
             $response = call_user_func_array($routerHandler, $vars);
         } catch (HttpException $e) {
-            $response = new Response($e->getMessage(), $e->getStatusCode());
-        } catch (\Throwable $e) {
-            $response = new Response($e->getMessage(), 500);
+            $response = $this->createExceptionResponse($e);
         }
 
         return $response;
+    }
+
+    private function createExceptionResponse(\Exception $exception)
+    {
+        if (in_array($this->appEnv, ['local', 'test'], true)) {
+            throw $exception;
+        }
+
+        if ($exception instanceof HttpException) {
+            return new Response($exception->getMessage(), $exception->getStatusCode());
+        }
+
+        return new Response('Some fatal server error', 500);
     }
 }
