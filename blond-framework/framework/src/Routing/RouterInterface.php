@@ -2,11 +2,12 @@
 
 namespace Sunlazor\BlondFramework\Routing;
 
+use Psr\Container\ContainerInterface;
 use Sunlazor\BlondFramework\Http\Request;
 
 interface RouterInterface
 {
-    public function dispatch(Request $request);
+    public function dispatch(Request $request, ContainerInterface $container);
 
     public function registerRoutes(array $routes);
 }
