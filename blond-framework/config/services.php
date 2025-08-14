@@ -7,17 +7,22 @@ use League\Container\ReflectionContainer;
 use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Routing\Router;
 use Sunlazor\BlondFramework\Routing\RouterInterface;
+use Symfony\Component\Dotenv\Dotenv;
 
-// Application parameters
+//// Application parameters
 
+// Routes
 $routes = include BASE_PATH . '/routes/web.php';
+// .env
+$dotEnv = new DotEnv();
+$dotEnv->load(BASE_PATH . '/.env');
 
-// Application service container
+//// Application service container
 
 $container = new Container();
 
 // env
-$container->add('APP_ENV', new StringArgument('local'));
+$container->add('APP_ENV', new StringArgument($_ENV['APP_ENV'] ?? 'local'));
 
 // Auto-wiring
 $container->delegate(new ReflectionContainer(true));

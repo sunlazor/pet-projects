@@ -9,6 +9,7 @@
       <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/sunlazor/blond-framework" />
       <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/league/container" />
       <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/symfony/dotenv" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
