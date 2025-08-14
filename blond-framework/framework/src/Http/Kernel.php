@@ -23,7 +23,7 @@ class Kernel
             [$routerHandler, $vars] = $this->router->dispatch($request, $this->container);
 
             $response = call_user_func_array($routerHandler, $vars);
-        } catch (HttpException $e) {
+        } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
 
