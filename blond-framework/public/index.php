@@ -10,6 +10,8 @@ use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Http\Request;
 use Sunlazor\BlondFramework\Routing\Router;
 
+$container = require_once BASE_PATH . '/config/services.php';
+
 $router = new Router();
 $kernel = new Kernel($router);
 
