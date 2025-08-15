@@ -12,9 +12,7 @@
   ],
   "require": {
     "php": "^8.4",
-    "sunlazor/blond-framework": "main-dev",
-    "league/container": "^5.1",
-    "symfony/dotenv": "^7.3"
+    "sunlazor/blond-framework": "main-dev"
   },
   "require-dev": {
     "symfony/var-dumper": "^7.3"

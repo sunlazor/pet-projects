@@ -53,6 +53,8 @@
       <path value="$PROJECT_DIR$/blond-framework/vendor/league/container" />
       <path value="$PROJECT_DIR$/blond-framework/vendor/psr/container" />
       <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/twig/twig" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
