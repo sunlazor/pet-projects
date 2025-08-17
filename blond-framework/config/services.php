@@ -47,7 +47,7 @@ $container
     ->addArgument(new StringArgument($viewsPath));
 $container
     ->addShared('twig', \Twig\Environment::class)
-    ->addArgument(new StringArgument('twig-loader'));
+    ->addArgument('twig-loader');
 
 $container->inflector(BaseController::class)->invokeMethod('setContainer', [$container]);
 

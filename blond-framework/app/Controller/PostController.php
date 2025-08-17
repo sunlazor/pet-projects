@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Http\Response;
 
-class PostController {
+class PostController extends BaseController
+{
     public function get(int $id): Response
     {
-        return new Response("PostController get: {$id}");
+        $content = $this->twigRender('post.html.twig', ['postId' => $id]);
+
+        return new Response($content);
     }
 }

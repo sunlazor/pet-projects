@@ -14,6 +14,11 @@ class HelloController extends BaseController
 
     public function hello(): Response
     {
-        return new Response('Hello World!' . " " . $this->dependOnMeService->getRandom());
+        $content = $this->twigRender(
+            'home.html.twig',
+            ['random' => $this->dependOnMeService->getRandom()],
+        );
+
+        return new Response($content);
     }
 }

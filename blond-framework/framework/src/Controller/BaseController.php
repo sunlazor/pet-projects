@@ -12,4 +12,9 @@ abstract class BaseController
     {
         $this->container = $container;
     }
+
+    public function twigRender(string $content, array $params = []): string
+    {
+        return $this->container->get('twig')->render($content, $params);
+    }
 }
