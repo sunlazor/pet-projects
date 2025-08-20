@@ -13,4 +13,11 @@ class PostController extends BaseController
 
         return new Response($content);
     }
+
+    public function create(): Response
+    {
+        $content = $this->twigRender('post_create.html.twig');
+
+        return new Response($content);
+    }
 }
