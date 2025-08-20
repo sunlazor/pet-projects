@@ -1,10 +1,12 @@
 <?php
 
+use Doctrine\DBAL\Connection;
 use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
 use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Routing\Router;
 use Sunlazor\BlondFramework\Routing\RouterInterface;
@@ -19,6 +21,8 @@ $dotEnv = new DotEnv();
 $dotEnv->load(BASE_PATH . '/.env');
 // templates
 $viewsPath = BASE_PATH . '/views';
+// database
+$databaseUrl = $_ENV['APP_DATABASE_URL'];
 
 //// Application service container
 $container = new Container();
@@ -50,5 +54,13 @@ $container
     ->addArgument('twig-loader');
 
 $container->inflector(BaseController::class)->invokeMethod('setContainer', [$container]);
+
+$container->add(ConnectionFactory::class)->addArgument(new StringArgument($databaseUrl));
+$container->addShared(
+    Connection::class,
+    function () use ($container): Connection {
+        return $container->get(ConnectionFactory::class)->create();
+    },
+);
 
 return $container;

@@ -13,6 +13,10 @@
       <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/symfony/dotenv" />
       <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/symfony/polyfill-ctype" />
       <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/twig/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/log" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
