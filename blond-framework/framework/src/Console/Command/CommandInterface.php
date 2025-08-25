@@ -1,6 +1,6 @@
 <?php
 
-namespace Sunlazor\BlondFramework\Console;
+namespace Sunlazor\BlondFramework\Console\Command;
 
 interface CommandInterface
 {

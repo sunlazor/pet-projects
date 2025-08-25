@@ -5,6 +5,7 @@ use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
+use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
 use Sunlazor\BlondFramework\Http\Kernel;
@@ -33,6 +34,12 @@ $container->add('APP_ENV', new StringArgument($_ENV['APP_ENV'] ?? 'local'));
 // Auto-wiring
 $container->delegate(new ReflectionContainer(true));
 
+// Commands
+$container->add(
+    'framework-commands-namespace',
+    new StringArgument('Sunlazor\\BlondFramework\\Console\\Command\\'),
+);
+
 // Services
 
 $container->add(RouterInterface::class, Router::class);
@@ -44,6 +51,8 @@ $container
     ->add(Kernel::class)
     ->addArgument(RouterInterface::class)
     ->addArgument($container);
+
+$container->add(ConsoleKernel::class)->addArgument($container);
 
 // Twig
 $container
