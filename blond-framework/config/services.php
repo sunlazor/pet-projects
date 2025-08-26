@@ -48,6 +48,8 @@ $container
     ->extend(RouterInterface::class)
     ->addMethodCall('registerRoutes', ['routes' => new ArrayArgument($routes)]);
 
+$container->add(Application::class)->addArgument($container);
+
 $container
     ->add(Kernel::class)
     ->addArgument(RouterInterface::class)
