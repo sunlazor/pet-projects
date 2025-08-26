@@ -5,6 +5,7 @@ use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
+use Sunlazor\BlondFramework\Console\Application;
 use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
@@ -52,7 +53,10 @@ $container
     ->addArgument(RouterInterface::class)
     ->addArgument($container);
 
-$container->add(ConsoleKernel::class)->addArgument($container);
+$container->add(ConsoleKernel::class)
+    ->addArgument($container)
+    ->addArgument(Application::class)
+;
 
 // Twig
 $container

@@ -7,12 +7,18 @@ use Sunlazor\BlondFramework\Console\Command\CommandInterface;
 
 class Kernel
 {
-    public function __construct(private DefinitionContainerInterface $container) {}
+    public function __construct(
+        private readonly DefinitionContainerInterface $container,
+        private readonly Application $application,
+    ) {}
 
     public function handle(): int
     {
         $this->registerCommands();
-        return 0;
+
+        $status = $this->application->run();
+
+        return $status;
     }
 
     private function registerCommands(): void

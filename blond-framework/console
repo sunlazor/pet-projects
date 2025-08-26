@@ -12,6 +12,7 @@ include_once BASE_PATH . '/vendor/autoload.php';
 /** @var Container $container */
 $container = require_once BASE_PATH . '/config/services.php';
 
+/** @var Kernel $kernel */
 $kernel = $container->get(Kernel::class);
 
 $status = $kernel->handle();
