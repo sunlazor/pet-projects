@@ -6,6 +6,7 @@ use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Sunlazor\BlondFramework\Console\Application;
+use Sunlazor\BlondFramework\Console\Command\MigrateCommand;
 use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
@@ -25,6 +26,8 @@ $dotEnv->load(BASE_PATH . '/.env');
 $viewsPath = BASE_PATH . '/views';
 // database
 $databaseUrl = $_ENV['APP_DATABASE_URL'];
+// commands
+$commandsPrefix = 'console:';
 
 //// Application service container
 $container = new Container();
@@ -77,5 +80,8 @@ $container->addShared(
         return $container->get(ConnectionFactory::class)->create();
     },
 );
+
+$container->add($commandsPrefix . MigrateCommand::$name, MigrateCommand::class)
+    ->addArgument(Connection::class);
 
 return $container;
