@@ -18,23 +18,40 @@ class MigrateCommand implements CommandInterface
 
     public function __construct(private readonly Connection $connection) {}
 
+    /**
+     * @throws Exception
+     * @throws TypesException
+     * @throws \Throwable
+     */
     public function execute(array $parameters = []): int
     {
-        // 1. Создать таблицу миграций (migrations), если таблица еще не существует
-        
-        $this->checkOrCreateMigrationsTable();
+        try {
+            // 1. Создать таблицу миграций (migrations), если таблица еще не существует
 
-        // 2. Получить $appliedMigrations (миграции, которые уже есть в таблице migrations)
+            $this->checkOrCreateMigrationsTable();
 
-        // 3. Получить $migrationFiles из папки миграций
+            $this->connection->beginTransaction();
+            // 2. Получить $appliedMigrations (миграции, которые уже есть в таблице migrations)
 
-        // 4. Получить миграции для применения
+            $appliedMigrations = $this->getAppliedMigrations();
 
-        // 5. Создать SQL-запрос для миграций, которые еще не были выполнены
+            // 3. Получить $migrationFiles из папки миграций
 
-        // 6. Добавить миграцию в базу данных
+            // 4. Получить миграции для применения
 
-        // 7. Выполнить SQL-запрос
+            // 5. Создать SQL-запрос для миграций, которые еще не были выполнены
+
+            // 6. Добавить миграцию в базу данных
+
+            // 7. Выполнить SQL-запрос
+
+
+            $this->connection->commit();
+        } catch (\Throwable $e) {
+            $this->connection->rollBack();
+
+            throw $e;
+        }
 
         return 0;
     }
@@ -52,30 +69,34 @@ class MigrateCommand implements CommandInterface
 
         $migrationTable = Table::editor()
             ->setUnquotedName(self::MIGRATIONS_TABLE_NAME)
-            ->addColumn(Column::editor()
-                ->setUnquotedName('id')
-                ->setTypeName('integer')
-                ->setAutoincrement(true)
-                ->setUnsigned(true)
-                ->create()
+            ->addColumn(
+                Column::editor()
+                    ->setUnquotedName('id')
+                    ->setTypeName('integer')
+                    ->setAutoincrement(true)
+                    ->setUnsigned(true)
+                    ->create()
             )
-            ->addColumn(Column::editor()
-                ->setUnquotedName('migration')
-                ->setTypeName('string')
-                ->setLength(32)
-                ->setNotNull(true)
-                ->create()
+            ->addColumn(
+                Column::editor()
+                    ->setUnquotedName('migration')
+                    ->setTypeName('string')
+                    ->setLength(32)
+                    ->setNotNull(true)
+                    ->create()
             )
-            ->addColumn(Column::editor()
-                ->setUnquotedName('created_at')
-                ->setTypeName('datetime_immutable')
-                ->setDefaultValue('CURRENT_TIMESTAMP')
-                ->setNotNull(true)
-                ->create()
+            ->addColumn(
+                Column::editor()
+                    ->setUnquotedName('created_at')
+                    ->setTypeName('datetime_immutable')
+                    ->setDefaultValue('CURRENT_TIMESTAMP')
+                    ->setNotNull(true)
+                    ->create()
             )
-            ->addPrimaryKeyConstraint(PrimaryKeyConstraint::editor()
-                ->setUnquotedColumnNames('id')
-                ->create()
+            ->addPrimaryKeyConstraint(
+                PrimaryKeyConstraint::editor()
+                    ->setUnquotedColumnNames('id')
+                    ->create()
             )
             ->create()
         ;
@@ -88,4 +109,18 @@ class MigrateCommand implements CommandInterface
 
         echo 'Migrations table was created' . PHP_EOL;
     }
+
+    /**
+     * @throws Exception
+     */
+    private function getAppliedMigrations(): array
+    {
+        return $this->connection
+            ->createQueryBuilder()
+            ->select('migration')
+            ->from(self::MIGRATIONS_TABLE_NAME)
+            ->fetchFirstColumn()
+        ;
+    }
+
 }
