@@ -16,7 +16,10 @@ class MigrateCommand implements CommandInterface
 
     public static string $name = 'migrate';
 
-    public function __construct(private readonly Connection $connection) {}
+    public function __construct(
+        private readonly Connection $connection,
+        private readonly string $databaseMigrationsPath,
+    ) {}
 
     /**
      * @throws Exception
@@ -37,7 +40,13 @@ class MigrateCommand implements CommandInterface
 
             // 3. Получить $migrationFiles из папки миграций
 
+            $migrationFiles = $this->getMigrationFiles();
+
             // 4. Получить миграции для применения
+
+            $migrationsToApply = array_diff($migrationFiles, $appliedMigrations);
+
+            dd($migrationsToApply);
 
             // 5. Создать SQL-запрос для миграций, которые еще не были выполнены
 
@@ -75,7 +84,7 @@ class MigrateCommand implements CommandInterface
                     ->setTypeName('integer')
                     ->setAutoincrement(true)
                     ->setUnsigned(true)
-                    ->create()
+                    ->create(),
             )
             ->addColumn(
                 Column::editor()
@@ -83,7 +92,7 @@ class MigrateCommand implements CommandInterface
                     ->setTypeName('string')
                     ->setLength(32)
                     ->setNotNull(true)
-                    ->create()
+                    ->create(),
             )
             ->addColumn(
                 Column::editor()
@@ -91,15 +100,14 @@ class MigrateCommand implements CommandInterface
                     ->setTypeName('datetime_immutable')
                     ->setDefaultValue('CURRENT_TIMESTAMP')
                     ->setNotNull(true)
-                    ->create()
+                    ->create(),
             )
             ->addPrimaryKeyConstraint(
                 PrimaryKeyConstraint::editor()
                     ->setUnquotedColumnNames('id')
-                    ->create()
+                    ->create(),
             )
-            ->create()
-        ;
+            ->create();
 
         $schema = new Schema([$migrationTable]);
 
@@ -119,8 +127,19 @@ class MigrateCommand implements CommandInterface
             ->createQueryBuilder()
             ->select('migration')
             ->from(self::MIGRATIONS_TABLE_NAME)
-            ->fetchFirstColumn()
-        ;
+            ->fetchFirstColumn();
     }
 
+    private function getMigrationFiles(): array
+    {
+        $files = [];
+
+        $filesIterator = new \DirectoryIterator($this->databaseMigrationsPath);
+        foreach ($filesIterator as $file) {
+            if ($file->isFile()) {
+                $files[] = $file->getFilename();
+            }
+        }
+        return $files;
+    }
 }

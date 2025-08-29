@@ -26,6 +26,7 @@ $dotEnv->load(BASE_PATH . '/.env');
 $viewsPath = BASE_PATH . '/views';
 // database
 $databaseUrl = $_ENV['APP_DATABASE_URL'];
+$databaseMigrationsPath = BASE_PATH . '/database/migrations';
 // commands
 $commandsPrefix = 'console:';
 
@@ -58,7 +59,8 @@ $container
     ->addArgument(RouterInterface::class)
     ->addArgument($container);
 
-$container->add(ConsoleKernel::class)
+$container
+    ->add(ConsoleKernel::class)
     ->addArgument($container)
     ->addArgument(Application::class)
 ;
@@ -81,7 +83,9 @@ $container->addShared(
     },
 );
 
-$container->add($commandsPrefix . MigrateCommand::$name, MigrateCommand::class)
-    ->addArgument(Connection::class);
+$container
+    ->add($commandsPrefix . MigrateCommand::$name, MigrateCommand::class)
+    ->addArgument(Connection::class)
+    ->addArgument(new StringArgument($databaseMigrationsPath));
 
 return $container;
