@@ -26,7 +26,7 @@ $dotEnv->load(BASE_PATH . '/.env');
 $viewsPath = BASE_PATH . '/views';
 // database
 $databaseUrl = $_ENV['APP_DATABASE_URL'];
-$databaseMigrationsPath = BASE_PATH . '/database/migrations';
+$databaseMigrationsPath = BASE_PATH . '/database/migrations/';
 // commands
 $commandsPrefix = 'console:';
 

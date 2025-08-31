@@ -46,14 +46,26 @@ class MigrateCommand implements CommandInterface
 
             $migrationsToApply = array_diff($migrationFiles, $appliedMigrations);
 
-            dd($migrationsToApply);
-
             // 5. Создать SQL-запрос для миграций, которые еще не были выполнены
 
-            // 6. Добавить миграцию в базу данных
+            $migrationChanges = [];
+            foreach ($migrationsToApply as $migrationFile) {
+                $migration = require $this->databaseMigrationsPath . $migrationFile;
+                if ($migrationChange = $migration->up()) {
+                    $migrationChanges[] = $migrationChange;
+                }
+
+                // 6. Добавить миграцию в базу данных
+                $this->insertMigrationFact($migrationFile);
+            }
 
             // 7. Выполнить SQL-запрос
+            $schema = new Schema($migrationChanges);
 
+            $sqlArray = $schema->toSql($this->connection->getDatabasePlatform());
+             foreach ($sqlArray as $sql) {
+                 $this->connection->executeQuery($sql);
+             }
 
             $this->connection->commit();
         } catch (\Throwable $e) {
@@ -142,4 +154,18 @@ class MigrateCommand implements CommandInterface
         }
         return $files;
     }
+
+    /**
+     * @throws Exception
+     */
+    private function insertMigrationFact(string $migrationFile): void
+    {
+        $qb = $this->connection->createQueryBuilder();
+        $qb
+            ->insert(self::MIGRATIONS_TABLE_NAME)
+            ->values(['migration' => ':migration'])
+            ->setParameter('migration', $migrationFile)
+            ->executeQuery();
+    }
+
 }
