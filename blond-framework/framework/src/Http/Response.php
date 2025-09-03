@@ -16,4 +16,14 @@ class Response
     {
         echo $this->content;
     }
+
+    public function getHeader(string $key): mixed
+    {
+        return $this->headers[$key] ?? null;
+    }
+
+    public function getStatusCode(): int
+    {
+        return $this->statusCode;
+    }
 }

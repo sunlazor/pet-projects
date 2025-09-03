@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Services\PostService;
 use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Http\RedirectResponse;
 use Sunlazor\BlondFramework\Http\Response;
 
 class PostController extends BaseController
@@ -33,6 +34,6 @@ class PostController extends BaseController
         $post = Post::create($postData['title'], $postData['body']);
         $postId = $this->postService->save($post);
 
-        return $this->show($postId);
+        return new RedirectResponse("/posts/{$postId}");
     }
 }
