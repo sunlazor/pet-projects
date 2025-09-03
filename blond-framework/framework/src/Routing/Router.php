@@ -5,9 +5,11 @@ namespace Sunlazor\BlondFramework\Routing;
 use FastRoute\Dispatcher;
 use FastRoute\RouteCollector;
 use Psr\Container\ContainerInterface;
+use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Http\Request;
 use Sunlazor\BlondFramework\Routing\Exception\MethodNotAllowedException;
 use Sunlazor\BlondFramework\Routing\Exception\RouteNotFoundException;
+
 use function FastRoute\simpleDispatcher;
 
 class Router implements RouterInterface
@@ -21,6 +23,10 @@ class Router implements RouterInterface
         if (is_array($handler)) {
             [$controllerId, $method] = $handler;
             $controller = $container->get($controllerId);
+
+            if (is_subclass_of($controller, BaseController::class)) {
+                $controller->setRequest($request);
+            }
 
             return [[$controller, $method], $vars];
         } elseif (is_callable($handler)) {

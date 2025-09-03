@@ -10,6 +10,7 @@ return [
     Route::get('/hi/{name}', function (string $name) {
         return new Response("Hello {$name}!");
     }),
-    Route::get('/posts/{id:\d+}', [PostController::class, 'get']),
+    Route::get('/posts/{id:\d+}', [PostController::class, 'show']),
     Route::get('/posts/create', [PostController::class, 'create']),
+    Route::post('/posts', [PostController::class, 'store']),
 ];

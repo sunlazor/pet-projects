@@ -19,9 +19,7 @@ class ConnectionFactory
     public function create(): Connection
     {
         $connectionParams = new DsnParser()->parse($this->databaseUrl);
-        $conn = DriverManager::getConnection($connectionParams);
-        $conn->setAutoCommit(false);
 
-        return $conn;
+        return DriverManager::getConnection($connectionParams);
     }
 }
