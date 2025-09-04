@@ -13,6 +13,9 @@ use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
 use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Routing\Router;
 use Sunlazor\BlondFramework\Routing\RouterInterface;
+use Sunlazor\BlondFramework\Session\Session;
+use Sunlazor\BlondFramework\Session\SessionInterface;
+use Sunlazor\BlondFramework\Template\TwigFactory;
 use Symfony\Component\Dotenv\Dotenv;
 
 //// Application parameters
@@ -65,13 +68,16 @@ $container
     ->addArgument(Application::class)
 ;
 
+$container->addShared(SessionInterface::class, Session::class);
+
 // Twig
 $container
-    ->addShared('twig-loader', \Twig\Loader\FilesystemLoader::class)
-    ->addArgument(new StringArgument($viewsPath));
-$container
-    ->addShared('twig', \Twig\Environment::class)
-    ->addArgument('twig-loader');
+    ->add('twig-factory', TwigFactory::class)
+    ->addArguments([new StringArgument($viewsPath), SessionInterface::class]);
+
+$container->addShared('twig', function () use ($container) {
+    return $container->get('twig-factory')->create();
+});
 
 $container->inflector(BaseController::class)->invokeMethod('setContainer', [$container]);
 

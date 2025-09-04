@@ -7,10 +7,14 @@ use App\Services\PostService;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Http\RedirectResponse;
 use Sunlazor\BlondFramework\Http\Response;
+use Sunlazor\BlondFramework\Session\SessionInterface;
 
 class PostController extends BaseController
 {
-    public function __construct(private PostService $postService) {}
+    public function __construct(
+        private PostService $postService,
+        private SessionInterface $session,
+    ) {}
 
     public function create(): Response
     {
@@ -33,6 +37,8 @@ class PostController extends BaseController
         $postData = $this->request->getPostData();
         $post = Post::create($postData['title'], $postData['body']);
         $postId = $this->postService->save($post);
+
+        $this->session->setFlash('success', 'Пост создан! Yay!');
 
         return new RedirectResponse("/posts/{$postId}");
     }
