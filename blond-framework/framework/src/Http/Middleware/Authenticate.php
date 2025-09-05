@@ -1,10 +1,13 @@
 <?php
 
-namespace Sunlazor\BlondFramework\Http;
+namespace Sunlazor\BlondFramework\Http\Middleware;
+
+use Sunlazor\BlondFramework\Http\Request;
+use Sunlazor\BlondFramework\Http\Response;
 
 class Authenticate implements MiddlewareInterface
 {
-    private bool $isAuthenticated = false;
+    private bool $isAuthenticated = true;
 
     public function process(Request $request, RequestHandlerInterface $handler): Response
     {

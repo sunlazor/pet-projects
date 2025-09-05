@@ -3,6 +3,7 @@
 namespace Sunlazor\BlondFramework\Http;
 
 use Psr\Container\ContainerInterface;
+use Sunlazor\BlondFramework\Http\Middleware\RequestHandlerInterface;
 use Sunlazor\BlondFramework\Routing\Exception\HttpException;
 use Sunlazor\BlondFramework\Routing\RouterInterface;
 
@@ -13,6 +14,7 @@ class Kernel
     public function __construct(
         readonly private RouterInterface $router,
         readonly private ContainerInterface $container,
+        readonly private RequestHandlerInterface $requestHandler,
     ) {
         $this->appEnv = $container->get('APP_ENV');
     }
@@ -20,9 +22,10 @@ class Kernel
     public function handle(Request $request): Response
     {
         try {
-            [$routerHandler, $vars] = $this->router->dispatch($request, $this->container);
-
-            $response = call_user_func_array($routerHandler, $vars);
+            $response = $this->requestHandler->handle($request);
+//            [$routerHandler, $vars] = $this->router->dispatch($request, $this->container);
+//
+//            $response = call_user_func_array($routerHandler, $vars);
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }

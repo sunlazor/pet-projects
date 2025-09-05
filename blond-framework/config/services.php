@@ -11,6 +11,8 @@ use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
 use Sunlazor\BlondFramework\Http\Kernel;
+use Sunlazor\BlondFramework\Http\Middleware\RequestHandler;
+use Sunlazor\BlondFramework\Http\Middleware\RequestHandlerInterface;
 use Sunlazor\BlondFramework\Routing\Router;
 use Sunlazor\BlondFramework\Routing\RouterInterface;
 use Sunlazor\BlondFramework\Session\Session;
@@ -36,11 +38,11 @@ $commandsPrefix = 'console:';
 //// Application service container
 $container = new Container();
 
-// env
-$container->add('APP_ENV', new StringArgument($_ENV['APP_ENV'] ?? 'local'));
-
 // Auto-wiring
 $container->delegate(new ReflectionContainer(true));
+
+// env
+$container->add('APP_ENV', new StringArgument($_ENV['APP_ENV'] ?? 'local'));
 
 // Commands
 $container->add(
@@ -57,10 +59,15 @@ $container
 
 $container->add(Application::class)->addArgument($container);
 
+$container->add(RequestHandlerInterface::class, RequestHandler::class)->addArgument($container);
+
+//dd($container);
+
 $container
     ->add(Kernel::class)
     ->addArgument(RouterInterface::class)
-    ->addArgument($container);
+    ->addArgument($container)
+    ->addArgument(RequestHandlerInterface::class);
 
 $container
     ->add(ConsoleKernel::class)

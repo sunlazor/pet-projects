@@ -1,6 +1,10 @@
 <?php
 
-namespace Sunlazor\BlondFramework\Http;
+namespace Sunlazor\BlondFramework\Http\Middleware;
+
+use Psr\Container\ContainerInterface;
+use Sunlazor\BlondFramework\Http\Request;
+use Sunlazor\BlondFramework\Http\Response;
 
 class RequestHandler implements RequestHandlerInterface
 {
@@ -8,6 +12,8 @@ class RequestHandler implements RequestHandlerInterface
         Authenticate::class,
         Success::class,
     ];
+
+    public function __construct(private ContainerInterface $container) {}
 
     public function handle(Request $request): Response
     {
@@ -18,12 +24,12 @@ class RequestHandler implements RequestHandlerInterface
         }
 
         // Получить следующий middleware-класс для выполнения
-        /** @var MiddlewareInterface $middlewareClass */
         $middlewareClass = array_shift($this->middlewares);
 
         // Создать новый экземпляр вызова процесса middleware на нем
-        $response = new $middlewareClass()->process($request, $this);
+        /** @var MiddlewareInterface $middleware */
+        $middleware = $this->container->get($middlewareClass);
 
-        return $response;
+        return $middleware->process($request, $this);
     }
 }
