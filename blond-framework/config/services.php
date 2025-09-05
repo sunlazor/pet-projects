@@ -5,6 +5,7 @@ use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
+use Psr\Container\ContainerInterface;
 use Sunlazor\BlondFramework\Console\Application;
 use Sunlazor\BlondFramework\Console\Command\MigrateCommand;
 use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
@@ -37,6 +38,7 @@ $commandsPrefix = 'console:';
 
 //// Application service container
 $container = new Container();
+$container->addShared(ContainerInterface::class, $container);
 
 // Auto-wiring
 $container->delegate(new ReflectionContainer(true));
