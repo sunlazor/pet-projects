@@ -2,8 +2,12 @@
 
 namespace Sunlazor\BlondFramework\Http;
 
+use Sunlazor\BlondFramework\Session\SessionInterface;
+
 class Request
 {
+    private SessionInterface $session;
+
     public function __construct(
         private readonly array $getParams,
         private readonly array $postData,
@@ -30,5 +34,15 @@ class Request
     public function getPostData(): array
     {
         return $this->postData;
+    }
+
+    public function getSession(): SessionInterface
+    {
+        return $this->session;
+    }
+
+    public function setSession(SessionInterface $session): void
+    {
+        $this->session = $session;
     }
 }

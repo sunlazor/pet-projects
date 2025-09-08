@@ -9,6 +9,7 @@ use Sunlazor\BlondFramework\Http\Response;
 class RequestHandler implements RequestHandlerInterface
 {
     private array $middlewares = [
+        SessionStart::class,
         Authenticate::class,
         RouteDispatcher::class,
     ];
