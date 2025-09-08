@@ -32,8 +32,7 @@ class PostController extends BaseController
 
     public function store(): Response
     {
-        $postData = $this->request->getPostData();
-        $post = Post::create($postData['title'], $postData['body']);
+        $post = Post::create($this->request->input('title'), $this->request->input('body'));
         $postId = $this->postService->save($post);
 
         $this->request->getSession()->setFlash('success', 'Пост создан! Yay!');

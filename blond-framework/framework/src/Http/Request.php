@@ -36,6 +36,11 @@ class Request
         return $this->postData;
     }
 
+    public function input(string $key, mixed $default = null): mixed
+    {
+        return $this->postData[$key] ?? $default;
+    }
+
     public function getSession(): SessionInterface
     {
         return $this->session;
