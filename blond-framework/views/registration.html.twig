@@ -1,6 +1,13 @@
 {% extends 'default.html.twig' %}
 
 {% block main %}
+    {% if session().hasFlash('error') %}
+        <div style="border: #B729D9">
+            {% for message in session().getFlash('error') %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
     <div class="bg-body-tertiary p-5 rounded">
         <form method="post" action="/reg">
             <div class="mb-3">

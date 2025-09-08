@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\User\RegistrationForm;
 use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Http\RedirectResponse;
 use Sunlazor\BlondFramework\Http\Response;
 
 class RegistrationController extends BaseController {
@@ -23,6 +24,14 @@ class RegistrationController extends BaseController {
             $this->request->input('password_confirm'),
             $this->request->input('name'),
         );
+
+        if ($form->hasValidationErrors()) {
+            foreach ($form->getValidationErrors() as $error) {
+                $this->request->getSession()->setFlash('error', $error);
+            }
+
+            return new RedirectResponse('/reg');
+        }
 
         dd($form);
     }

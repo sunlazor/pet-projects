@@ -20,4 +20,32 @@ class RegistrationForm
         $this->password = $password;
         $this->passwordConfirm = $passwordConfirm;
     }
+
+    public function hasValidationErrors(): bool
+    {
+        return !empty($this->getValidationErrors());
+    }
+
+    public function getValidationErrors(): array
+    {
+        $errors = [];
+
+        if (!empty($this->name) && strlen($this->name) > 25) {
+            $errors[] = 'Смените имя на покороче, по-братски прошу';
+        }
+
+        if (empty($this->email) || !filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            $errors[] = 'Ну это не эмейл, а хрень какая-то. Давай по новой';
+        }
+
+        if (empty($this->password) || strlen($this->password) < 8) {
+            $errors[] = 'Какой-то пароль не секюрный. Напряги извилины и настучи новый';
+        }
+
+        if ($this->password !== $this->passwordConfirm) {
+            $errors[] = 'Подожжи! А что ты мне два разных пароля подсунул? Не стараешься совсем, сделай как нужно';
+        }
+
+        return $errors;
+    }
 }
