@@ -15,10 +15,10 @@ class User
     public function create(
         string $email,
         string $password,
-        \DateTimeImmutable $createdAt = new \DateTimeImmutable(),
+        \DateTimeImmutable|null $createdAt = null,
         int|null $id = null,
         string|null $name = null,
     ): static {
-        return new static($id, $email, $password, $name, $createdAt);
+        return new static($id, $email, $password, $name, $createdAt ?? new \DateTimeImmutable());
     }
 }
