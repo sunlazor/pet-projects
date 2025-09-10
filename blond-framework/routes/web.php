@@ -3,6 +3,7 @@
 use App\Controller\HelloController;
 use App\Controller\PostController;
 use App\Controller\RegistrationController;
+use App\Services\DashboardController;
 use App\Services\LoginController;
 use Sunlazor\BlondFramework\Http\Response;
 use Sunlazor\BlondFramework\Routing\Route;
@@ -21,4 +22,6 @@ return [
 
     Route::get('/login', [LoginController::class, 'form']),
     Route::post('/login', [LoginController::class, 'login']),
+
+    Route::get('/dash', [DashboardController::class, 'index']),
 ];

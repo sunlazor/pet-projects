@@ -108,6 +108,7 @@ $container
 
 $container
     ->add(SessionAuthInterface::class, SessionAuthentication::class)
-    ->addArgument(UserService::class);
+    ->addArgument(UserService::class)
+    ->addArgument(SessionInterface::class);
 
 return $container;

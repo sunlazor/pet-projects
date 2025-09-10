@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Sunlazor\BlondFramework\Authentication\SessionAuthInterface;
 use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Http\RedirectResponse;
 use Sunlazor\BlondFramework\Http\Response;
 
 class LoginController extends BaseController {
@@ -18,11 +19,19 @@ class LoginController extends BaseController {
 
     public function login(): Response
     {
-        $res = $this->sessionAuth->authenticate(
+        $isAuth = $this->sessionAuth->authenticate(
             $this->request->input('email'),
             $this->request->input('password'),
         );
 
-        dd($res);
+        if (!$isAuth) {
+            $this->request->getSession()->setFlash('error', 'Неверный логин или пароль');
+
+            return new RedirectResponse('/login');
+        }
+
+        $this->request->getSession()->setFlash('success', 'Успешный вход');
+
+        return new RedirectResponse('/dash');
     }
 }

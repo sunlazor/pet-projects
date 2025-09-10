@@ -1,0 +1,12 @@
+{% extends 'default.html.twig' %}
+
+{% block main %}
+    {% if session().hasFlash('success') %}
+        <div style="border: #B729D9">
+            {% for message in session().getFlash('success') %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    Hello o/
+{% endblock %}

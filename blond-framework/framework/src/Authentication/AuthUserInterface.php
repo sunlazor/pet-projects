@@ -2,4 +2,10 @@
 
 namespace Sunlazor\BlondFramework\Authentication;
 
-interface AuthUserInterface {}
+interface AuthUserInterface {
+    public function getId(): int|null;
+
+    public function getEmail(): string;
+
+    public function getPassword(): string;
+}
