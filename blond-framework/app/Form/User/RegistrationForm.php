@@ -2,12 +2,17 @@
 
 namespace App\Form\User;
 
+use App\Entity\User;
+use App\Services\UserService;
+
 class RegistrationForm
 {
     private string $name;
     private string $email;
     private string $password;
     private string $passwordConfirm;
+
+    public function __construct(private UserService $userService) {}
 
     public function setFields(
         string $email,
@@ -47,5 +52,19 @@ class RegistrationForm
         }
 
         return $errors;
+    }
+
+    public function save(): User
+    {
+        $user = User::create(
+            $this->email,
+            $this->password,
+            new \DateTimeImmutable(),
+            $this->name,
+        );
+
+        $userId = $this->userService->save($user);
+
+        return $this->userService->findById($userId);
     }
 }
