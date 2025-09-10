@@ -11,11 +11,15 @@ class RequestHandler implements RequestHandlerInterface
     private array $middlewares = [
         ExtractRouteInfo::class,
         SessionStart::class,
-        Authenticate::class,
         RouteDispatcher::class,
     ];
 
     public function __construct(private ContainerInterface $container) {}
+
+    public function injectMiddleware(array $middleware): void
+    {
+        array_splice($this->middlewares, 0, 0, $middleware);
+    }
 
     public function handle(Request $request): Response
     {

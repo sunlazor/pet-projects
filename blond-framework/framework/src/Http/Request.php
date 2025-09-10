@@ -8,6 +8,10 @@ class Request
 {
     private SessionInterface $session;
 
+    private mixed $routeHandler;
+
+    private mixed $routeArgs;
+
     public function __construct(
         private readonly array $getParams,
         private readonly array $postData,
@@ -49,5 +53,25 @@ class Request
     public function setSession(SessionInterface $session): void
     {
         $this->session = $session;
+    }
+
+    public function getRouteHandler(): mixed
+    {
+        return $this->routeHandler;
+    }
+
+    public function setRouteHandler(mixed $routeHandler): void
+    {
+        $this->routeHandler = $routeHandler;
+    }
+
+    public function getRouteArgs(): mixed
+    {
+        return $this->routeArgs;
+    }
+
+    public function setRouteArgs(mixed $routeArgs): void
+    {
+        $this->routeArgs = $routeArgs;
     }
 }

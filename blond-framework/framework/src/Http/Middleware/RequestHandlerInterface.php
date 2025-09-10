@@ -7,5 +7,7 @@ use Sunlazor\BlondFramework\Http\Response;
 
 interface RequestHandlerInterface
 {
+    public function injectMiddleware(array $middleware): void;
+
     public function handle(Request $request): Response;
 }

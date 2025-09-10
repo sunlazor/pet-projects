@@ -15,6 +15,7 @@ use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
 use Sunlazor\BlondFramework\Http\Kernel;
+use Sunlazor\BlondFramework\Http\Middleware\ExtractRouteInfo;
 use Sunlazor\BlondFramework\Http\Middleware\RequestHandler;
 use Sunlazor\BlondFramework\Http\Middleware\RequestHandlerInterface;
 use Sunlazor\BlondFramework\Routing\Router;
@@ -58,15 +59,12 @@ $container->add(
 // Services
 
 $container->add(RouterInterface::class, Router::class);
-$container
-    ->extend(RouterInterface::class)
-    ->addMethodCall('registerRoutes', ['routes' => new ArrayArgument($routes)]);
+
+$container->add(ExtractRouteInfo::class)->addArgument(new ArrayArgument($routes));
 
 $container->add(Application::class)->addArgument($container);
 
 $container->add(RequestHandlerInterface::class, RequestHandler::class)->addArgument($container);
-
-//dd($container);
 
 $container
     ->add(Kernel::class)
