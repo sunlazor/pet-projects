@@ -1,11 +1,14 @@
 <?php
 
+use App\Services\UserService;
 use Doctrine\DBAL\Connection;
 use League\Container\Argument\Literal\ArrayArgument;
 use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Psr\Container\ContainerInterface;
+use Sunlazor\BlondFramework\Authentication\SessionAuthentication;
+use Sunlazor\BlondFramework\Authentication\SessionAuthInterface;
 use Sunlazor\BlondFramework\Console\Application;
 use Sunlazor\BlondFramework\Console\Command\MigrateCommand;
 use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
@@ -102,5 +105,9 @@ $container
     ->add($commandsPrefix . MigrateCommand::$name, MigrateCommand::class)
     ->addArgument(Connection::class)
     ->addArgument(new StringArgument($databaseMigrationsPath));
+
+$container
+    ->add(SessionAuthInterface::class, SessionAuthentication::class)
+    ->addArgument(UserService::class);
 
 return $container;
