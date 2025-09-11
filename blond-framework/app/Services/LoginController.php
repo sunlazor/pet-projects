@@ -34,4 +34,11 @@ class LoginController extends BaseController {
 
         return new RedirectResponse('/dash');
     }
+
+    public function logout(): Response
+    {
+        $this->sessionAuth->logout();
+
+        return new RedirectResponse('/login');
+    }
 }

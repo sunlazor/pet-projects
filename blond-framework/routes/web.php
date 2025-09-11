@@ -24,6 +24,7 @@ return [
 
     Route::get('/login', [LoginController::class, 'form'], [Guest::class]),
     Route::post('/login', [LoginController::class, 'login']),
+    Route::post('/logout', [LoginController::class, 'logout']),
 
     Route::get('/dash', [DashboardController::class, 'index'], [Authenticate::class]),
 ];
