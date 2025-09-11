@@ -6,6 +6,7 @@ use App\Controller\RegistrationController;
 use App\Services\DashboardController;
 use App\Services\LoginController;
 use Sunlazor\BlondFramework\Http\Middleware\Authenticate;
+use Sunlazor\BlondFramework\Http\Middleware\Guest;
 use Sunlazor\BlondFramework\Http\Response;
 use Sunlazor\BlondFramework\Routing\Route;
 
@@ -18,10 +19,10 @@ return [
     Route::get('/posts/create', [PostController::class, 'create']),
     Route::post('/posts', [PostController::class, 'store']),
 
-    Route::get('/reg', [RegistrationController::class, 'form']),
+    Route::get('/reg', [RegistrationController::class, 'form'], [Guest::class]),
     Route::post('/reg', [RegistrationController::class, 'registration']),
 
-    Route::get('/login', [LoginController::class, 'form']),
+    Route::get('/login', [LoginController::class, 'form'], [Guest::class]),
     Route::post('/login', [LoginController::class, 'login']),
 
     Route::get('/dash', [DashboardController::class, 'index'], [Authenticate::class]),
