@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use App\Form\User\RegistrationForm;
 use App\Services\UserService;
+use Sunlazor\BlondFramework\Authentication\SessionAuthInterface;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Http\RedirectResponse;
 use Sunlazor\BlondFramework\Http\Response;
 
 class RegistrationController extends BaseController
 {
-    public function __construct(private UserService $userService) {}
+    public function __construct(private UserService $userService, private SessionAuthInterface $sessionAuth) {}
 
     public function form(): Response
     {
@@ -48,8 +49,9 @@ class RegistrationController extends BaseController
             'success', "Пользователь {$user->getEmail()} зарегистрирован!"
         );
         // 5. Войти в систему под пользователем
+        $this->sessionAuth->login($user);
 
         // 6. Перенаправить на нужную страницу
-        return new RedirectResponse('/reg');
+        return new RedirectResponse('/dash');
     }
 }
