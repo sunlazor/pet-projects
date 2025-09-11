@@ -2,6 +2,7 @@
 
 namespace Sunlazor\BlondFramework\Authentication;
 
+use Sunlazor\BlondFramework\Session\Session;
 use Sunlazor\BlondFramework\Session\SessionInterface;
 
 class SessionAuthentication implements SessionAuthInterface
@@ -9,6 +10,11 @@ class SessionAuthentication implements SessionAuthInterface
     private AuthUserInterface $user;
 
     public function __construct(private UserServiceInterface $userService, private SessionInterface $session) {}
+
+    public function check(): bool
+    {
+        return $this->session->has(Session::AUTH_KEY);
+    }
 
     public function authenticate(string $email, string $password): bool
     {
@@ -29,7 +35,7 @@ class SessionAuthentication implements SessionAuthInterface
 
     public function login(AuthUserInterface $user)
     {
-        $this->session->set('user_id', $user->getId());
+        $this->session->set(Session::AUTH_KEY, $user->getId());
 
         $this->user = $user;
     }

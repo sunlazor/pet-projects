@@ -10,4 +10,6 @@ interface SessionAuthInterface {
     public function logout();
 
     public function getUser(): AuthUserInterface;
+
+    public function check(): bool;
 }
