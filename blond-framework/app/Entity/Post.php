@@ -2,7 +2,9 @@
 
 namespace App\Entity;
 
-class Post
+use Sunlazor\BlondFramework\Dbal\AbstractEntity;
+
+class Post extends AbstractEntity
 {
     public function __construct(
         private int|null $id,

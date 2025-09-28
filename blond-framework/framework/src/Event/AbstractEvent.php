@@ -4,7 +4,7 @@ namespace Sunlazor\BlondFramework\Event;
 
 use Psr\EventDispatcher\StoppableEventInterface;
 
-class AbstractEvent implements StoppableEventInterface
+abstract class AbstractEvent implements StoppableEventInterface
 {
     private bool $isPropagationStopped = false;
 

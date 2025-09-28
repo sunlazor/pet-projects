@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Controller\AbstractController;
 use Sunlazor\BlondFramework\Http\Response;
 
-class DashboardController extends BaseController {
+class DashboardController extends AbstractController {
     public function index(): Response
     {
         $content = $this->twigRender('dashboard.html.twig');

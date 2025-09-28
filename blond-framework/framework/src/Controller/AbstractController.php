@@ -5,7 +5,7 @@ namespace Sunlazor\BlondFramework\Controller;
 use Psr\Container\ContainerInterface;
 use Sunlazor\BlondFramework\Http\Request;
 
-abstract class BaseController
+abstract class AbstractController
 {
     protected ContainerInterface|null $container = null;
     protected Request $request;

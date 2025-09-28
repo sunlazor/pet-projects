@@ -3,11 +3,11 @@
 namespace App\Services;
 
 use Sunlazor\BlondFramework\Authentication\SessionAuthInterface;
-use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Controller\AbstractController;
 use Sunlazor\BlondFramework\Http\RedirectResponse;
 use Sunlazor\BlondFramework\Http\Response;
 
-class LoginController extends BaseController {
+class LoginController extends AbstractController {
     public function __construct(private SessionAuthInterface $sessionAuth) {}
 
     public function form(): Response

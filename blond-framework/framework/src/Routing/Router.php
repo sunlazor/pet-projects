@@ -3,7 +3,7 @@
 namespace Sunlazor\BlondFramework\Routing;
 
 use Psr\Container\ContainerInterface;
-use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Controller\AbstractController;
 use Sunlazor\BlondFramework\Http\Request;
 
 class Router implements RouterInterface
@@ -17,7 +17,7 @@ class Router implements RouterInterface
             [$controllerId, $method] = $handler;
             $controller = $container->get($controllerId);
 
-            if (is_subclass_of($controller, BaseController::class)) {
+            if (is_subclass_of($controller, AbstractController::class)) {
                 $controller->setRequest($request);
             }
 

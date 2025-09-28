@@ -3,8 +3,9 @@
 namespace App\Entity;
 
 use Sunlazor\BlondFramework\Authentication\AuthUserInterface;
+use Sunlazor\BlondFramework\Dbal\AbstractEntity;
 
-class User implements AuthUserInterface
+class User extends AbstractEntity implements AuthUserInterface
 {
     public function __construct(
         private int|null $id,

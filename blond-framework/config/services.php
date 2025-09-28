@@ -13,7 +13,7 @@ use Sunlazor\BlondFramework\Authentication\SessionAuthInterface;
 use Sunlazor\BlondFramework\Console\Application;
 use Sunlazor\BlondFramework\Console\Command\MigrateCommand;
 use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
-use Sunlazor\BlondFramework\Controller\BaseController;
+use Sunlazor\BlondFramework\Controller\AbstractController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
 use Sunlazor\BlondFramework\Event\EventDispatcher;
 use Sunlazor\BlondFramework\Http\Kernel;
@@ -93,7 +93,7 @@ $container->addShared('twig', function () use ($container) {
     return $container->get('twig-factory')->create();
 });
 
-$container->inflector(BaseController::class)->invokeMethod('setContainer', [$container]);
+$container->inflector(AbstractController::class)->invokeMethod('setContainer', [$container]);
 
 $container->add(ConnectionFactory::class)->addArgument(new StringArgument($databaseUrl));
 $container->addShared(

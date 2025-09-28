@@ -3,17 +3,17 @@
 namespace App\Services;
 
 use App\Entity\User;
-use Doctrine\DBAL\Connection;
 use Sunlazor\BlondFramework\Authentication\AuthUserInterface;
 use Sunlazor\BlondFramework\Authentication\UserServiceInterface;
+use Sunlazor\BlondFramework\Dbal\EntityService;
 
 class UserService implements UserServiceInterface
 {
-    public function __construct(private Connection $connection) {}
+    public function __construct(private EntityService $entityService) {}
 
     public function save(User $user): int
     {
-        $qb = $this->connection->createQueryBuilder();
+        $qb = $this->entityService->getConnection()->createQueryBuilder();
         $qb
             ->insert('users')
             ->values(['name' => ':name', 'email' => ':email', 'password' => ':password', 'created_at' => ':created_at'])
@@ -27,12 +27,12 @@ class UserService implements UserServiceInterface
             )
             ->executeQuery();
 
-        return $this->connection->lastInsertId();
+        return $this->entityService->save($user);
     }
 
     public function findById(int $id): User|null
     {
-        $qb = $this->connection->createQueryBuilder();
+        $qb = $this->entityService->getConnection()->createQueryBuilder();
         $qb->select('*')->from('users')->where('id = :id')->setParameter('id', $id);
         $result = $qb->executeQuery()->fetchAssociative();
 
@@ -51,7 +51,7 @@ class UserService implements UserServiceInterface
 
     public function findByEmail(string $email): AuthUserInterface|null
     {
-        $qb = $this->connection->createQueryBuilder();
+        $qb = $this->entityService->getConnection()->createQueryBuilder();
         $qb
             ->select('*')
             ->from('users')

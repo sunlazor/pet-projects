@@ -3,15 +3,15 @@
 namespace App\Services;
 
 use App\Entity\Post;
-use Doctrine\DBAL\Connection;
+use Sunlazor\BlondFramework\Dbal\EntityService;
 
 class PostService
 {
-    public function __construct(private Connection $connection) {}
+    public function __construct(private EntityService $entityService) {}
 
     public function save(Post $post): int
     {
-        $qb = $this->connection->createQueryBuilder();
+        $qb = $this->entityService->getConnection()->createQueryBuilder();
         $qb
             ->insert('posts')
             ->values(['title' => ':title', 'body' => ':body', 'created_at' => ':created_at'])
@@ -24,12 +24,12 @@ class PostService
             )
             ->executeQuery();
 
-        return $this->connection->lastInsertId();
+        return $this->entityService->save($post);
     }
 
     public function findById(int $id): Post|null
     {
-        $qb = $this->connection->createQueryBuilder();
+        $qb = $this->entityService->getConnection()->createQueryBuilder();
         $qb->select('*')->from('posts')->where('id = :id')->setParameter('id', $id);
         $result = $qb->executeQuery()->fetchAssociative();
 
