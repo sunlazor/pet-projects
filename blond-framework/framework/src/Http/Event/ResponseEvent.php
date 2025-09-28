@@ -3,6 +3,8 @@
 namespace Sunlazor\BlondFramework\Http\Event;
 
 use Sunlazor\BlondFramework\Event\AbstractEvent;
+use Sunlazor\BlondFramework\Http\Request;
+use Sunlazor\BlondFramework\Http\Response;
 
 class ResponseEvent extends AbstractEvent
 {

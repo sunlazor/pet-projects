@@ -3,20 +3,21 @@
 namespace Sunlazor\BlondFramework\Http;
 
 use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
+use Sunlazor\BlondFramework\Http\Event\ResponseEvent;
 use Sunlazor\BlondFramework\Http\Middleware\RequestHandlerInterface;
 use Sunlazor\BlondFramework\Routing\Exception\HttpException;
-use Sunlazor\BlondFramework\Routing\RouterInterface;
 
 class Kernel
 {
     private string $appEnv = 'local';
 
     public function __construct(
-        readonly private RouterInterface $router,
         readonly private ContainerInterface $container,
         readonly private RequestHandlerInterface $requestHandler,
+        readonly private EventDispatcherInterface $eventDispatcher,
     ) {
-        $this->appEnv = $container->get('APP_ENV');
+        $this->appEnv = $this->container->get('APP_ENV');
     }
 
     public function handle(Request $request): Response
@@ -26,6 +27,8 @@ class Kernel
         } catch (\Exception $e) {
             $response = $this->createExceptionResponse($e);
         }
+
+        $this->eventDispatcher->dispatch(new ResponseEvent($request, $response));
 
         return $response;
     }

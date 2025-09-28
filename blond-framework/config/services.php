@@ -7,6 +7,7 @@ use League\Container\Argument\Literal\StringArgument;
 use League\Container\Container;
 use League\Container\ReflectionContainer;
 use Psr\Container\ContainerInterface;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Sunlazor\BlondFramework\Authentication\SessionAuthentication;
 use Sunlazor\BlondFramework\Authentication\SessionAuthInterface;
 use Sunlazor\BlondFramework\Console\Application;
@@ -14,6 +15,7 @@ use Sunlazor\BlondFramework\Console\Command\MigrateCommand;
 use Sunlazor\BlondFramework\Console\Kernel as ConsoleKernel;
 use Sunlazor\BlondFramework\Controller\BaseController;
 use Sunlazor\BlondFramework\Dbal\ConnectionFactory;
+use Sunlazor\BlondFramework\Event\EventDispatcher;
 use Sunlazor\BlondFramework\Http\Kernel;
 use Sunlazor\BlondFramework\Http\Middleware\ExtractRouteInfo;
 use Sunlazor\BlondFramework\Http\Middleware\RequestHandler;
@@ -66,11 +68,13 @@ $container->add(Application::class)->addArgument($container);
 
 $container->add(RequestHandlerInterface::class, RequestHandler::class)->addArgument($container);
 
+$container->addShared(EventDispatcherInterface::class, EventDispatcher::class);
+
 $container
     ->add(Kernel::class)
-    ->addArgument(RouterInterface::class)
     ->addArgument($container)
-    ->addArgument(RequestHandlerInterface::class);
+    ->addArgument(RequestHandlerInterface::class)
+    ->addArgument(EventDispatcherInterface::class);
 
 $container
     ->add(ConsoleKernel::class)
