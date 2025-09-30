@@ -14,7 +14,15 @@ class Response
 
     public function send()
     {
+        ob_start();
+
+        foreach ($this->headers as $name => $value) {
+            header("$name: $value");
+        }
+
         echo $this->content;
+
+        ob_end_flush();
     }
 
     public function getHeader(string $key): mixed
