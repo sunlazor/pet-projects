@@ -29,22 +29,24 @@ use Symfony\Component\Dotenv\Dotenv;
 
 //// Application parameters
 
+$basePath = dirname(__DIR__);
 // Routes
-$routes = include BASE_PATH . '/routes/web.php';
+$routes = include $basePath . '/routes/web.php';
 // .env
 $dotEnv = new DotEnv();
-$dotEnv->load(BASE_PATH . '/.env');
+$dotEnv->load($basePath . '/.env');
 // templates
-$viewsPath = BASE_PATH . '/views';
+$viewsPath = $basePath . '/views';
 // database
 $databaseUrl = $_ENV['APP_DATABASE_URL'];
-$databaseMigrationsPath = BASE_PATH . '/database/migrations/';
+$databaseMigrationsPath = $basePath . '/database/migrations/';
 // commands
 $commandsPrefix = 'console:';
 
 //// Application service container
 $container = new Container();
 $container->addShared(ContainerInterface::class, $container);
+$container->add('base-path', new StringArgument($basePath));
 
 // Auto-wiring
 $container->delegate(new ReflectionContainer(true));
