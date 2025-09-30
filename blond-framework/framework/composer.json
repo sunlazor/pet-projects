@@ -1,0 +1,32 @@
+{
+  "name": "sunlazor/blond-framework",
+  "description": "Project of framework implementation course",
+  "authors": [
+    {
+      "name": "sunlazor"
+    }
+  ],
+  "autoload-dev": {
+    "psr-4": {
+      "Sunlazor\\BlondFramework\\Tests\\": "tests"
+    }
+  },
+  "autoload": {
+    "psr-4": {
+      "Sunlazor\\BlondFramework\\": "src"
+    }
+  },
+  "require": {
+    "php": "^8.4",
+    "nikic/fast-route": "^1.3",
+    "twig/twig": "^3.21",
+    "league/container": "^5.1",
+    "symfony/dotenv": "^7.3",
+    "doctrine/dbal": "^4.3",
+    "psr/event-dispatcher": "^1.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^12.3",
+    "symfony/var-dumper": "^7.3"
+  }
+}

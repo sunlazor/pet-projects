@@ -1,5 +1,7 @@
 {
   "require": {
-    "spiral/roadrunner-cli": "2.7.*"
+    "spiral/roadrunner-cli": "2.7.*",
+    "nyholm/psr7": "@stable",
+    "spiral/roadrunner-http": "v3.5.*"
   }
 }

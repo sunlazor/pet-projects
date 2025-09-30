@@ -1,0 +1,39 @@
+{% extends 'default.html.twig' %}
+
+{% block main %}
+    {% if session().hasFlash('error') %}
+        <div style="border: #B729D9">
+            {% for message in session().getFlash('error') %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if session().hasFlash('success') %}
+        <div style="border: #B729D9">
+            {% for message in session().getFlash('success') %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="bg-body-tertiary p-5 rounded">
+        <form method="post" action="/reg">
+            <div class="mb-3">
+                <label for="name" class="form-label">Имя</label>
+                <input type="text" name="name" class="form-control" id="name">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Почта</label>
+                <input type="email" name="email" class="form-control" id="email">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль</label>
+                <input type="password" name="password" class="form-control" id="password">
+            </div>
+            <div class="mb-3">
+                <label for="password_confirm" class="form-label">Подтверждение пароля</label>
+                <input type="password" name="password_confirm" class="form-control" id="password_confirm">
+            </div>
+            <button type="submit" class="btn btn-primary">Регистрация</button>
+        </form>
+    </div>
+{% endblock %}

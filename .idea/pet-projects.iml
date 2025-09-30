@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/blond-framework/app" isTestSource="false" packagePrefix="App\" />
+      <sourceFolder url="file://$MODULE_DIR$/blond-framework/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/flyfly/spec" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/blond-framework/framework/vendor/nikic/fast-route/test" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/framework/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/sunlazor/blond-framework" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/league/container" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/container" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/symfony/dotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/symfony/polyfill-ctype" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/twig/twig" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/doctrine/dbal" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/doctrine/deprecations" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/log" />
+      <excludeFolder url="file://$MODULE_DIR$/blond-framework/vendor/psr/event-dispatcher" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

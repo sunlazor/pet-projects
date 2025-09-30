@@ -37,6 +37,29 @@
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-ctype" />
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/flyfly/vendor/symfony/console" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/psr/http-message" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/psr/http-factory" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/nyholm/psr7" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/spiral/roadrunner-http" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/roadrunner-php/roadrunner-api-dto" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/symfony/polyfill-php83" />
+      <path value="$PROJECT_DIR$/flyfly/vendor/google/protobuf" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/nikic/fast-route" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/polyfill-mbstring" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/composer" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/sunlazor/blond-framework" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/league/container" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/psr/container" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/dotenv" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/symfony/polyfill-ctype" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/twig/twig" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/doctrine/dbal" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/doctrine/deprecations" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/psr/log" />
+      <path value="$PROJECT_DIR$/blond-framework/vendor/psr/event-dispatcher" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.4" />
@@ -46,6 +69,7 @@
   <component name="PhpUnit">
     <phpunit_settings>
       <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/flyfly/vendor/autoload.php" />
+      <PhpUnitSettings custom_loader_path="$PROJECT_DIR$/blond-framework/vendor/autoload.php" />
     </phpunit_settings>
   </component>
   <component name="PsalmOptionsConfiguration">

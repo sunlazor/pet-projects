@@ -5,6 +5,9 @@
       <PhpSpecSuiteConfiguration>
         <option name="myPath" value="$PROJECT_DIR$/flyfly" />
       </PhpSpecSuiteConfiguration>
+      <PhpSpecSuiteConfiguration>
+        <option name="myPath" value="$PROJECT_DIR$/blond-framework" />
+      </PhpSpecSuiteConfiguration>
     </suites>
   </component>
 </project>

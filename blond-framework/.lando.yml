@@ -1,0 +1,12 @@
+name: blond-framework
+recipe: lemp
+config:
+  php: '8.4'
+  database: mysql
+  via: nginx
+  config:
+    vhosts: .lando/nginx.conf
+
+services:
+  phpmyadmin:
+    type: phpmyadmin:5.2

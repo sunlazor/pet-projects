@@ -1,0 +1,18 @@
+{% extends 'default.html.twig' %}
+
+{% block main %}
+    <div class="bg-body-tertiary p-5 rounded">
+        <form method="post" action="/posts">
+            <div class="mb-3">
+                <label for="title" class="form-label">Заголовок</label>
+                <input type="text" name="title" class="form-control" id="title" aria-describedby="titleHelp" required>
+                <div id="titleHelp" class="form-text">Дайте своему посту броский заголовок.</div>
+            </div>
+            <div class="mb-3">
+                <label for="post-body" class="form-label">Контент</label>
+                <textarea name="body" id="post-body" cols="30" rows="10" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </div>
+{% endblock %}
